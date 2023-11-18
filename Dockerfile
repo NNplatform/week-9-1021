@@ -1,4 +1,13 @@
-FROM golang:1.20-alpine
-COPY main.go .
-RUN go build ./main.go
-ENTRYPOINT [ "./main" ]
+FROM node:19-alpine
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
