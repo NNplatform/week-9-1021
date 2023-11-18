@@ -23,4 +23,4 @@ jobs:
         run: |
              npm run build --if-present
              npm test
-             node app.js
+             node index.js
