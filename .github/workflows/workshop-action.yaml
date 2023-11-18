@@ -39,8 +39,8 @@ jobs:
       
       - name: Setup K8s Cluster
         uses: Azure/aks-set-context@v1
-        with: 
-           cluster-name: ${{ secrets.K8S_CLUSTER_NAME }}
+        with:
+              kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
       - name: Check Current cluster
         run: kubectl config current-context
