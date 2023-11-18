@@ -19,7 +19,7 @@ jobs:
              npm install
              npm ci
 
-      - name: Build and Run App.js
+      - name: Build and Run Index.js
         run: |
              npm run build --if-present
              npm test
