@@ -1,4 +1,4 @@
-name: Push to DockerHub
+name: Push to DockerHub & Deploy to K8s Cluster
 run-name: ${{ github.actor }} build and push container to DockerHub 
 on:
   push:
@@ -31,3 +31,15 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/week-9-1021:latest
+
+  deploy_to_k8s:
+
+    name: Deploy Image to K8s Cluster
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4   
+
+      - name: Connect K8s Cluster
+        run: ${{ secrets.KUBE_CONFIG }}    
