@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: week-9-1021-ingress
   labels:
-    app: week-9-1021
+    app: tcc-nodejs-ingress
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: HTTP
   namespace: group-3
@@ -13,7 +13,7 @@ spec:
     - host: tcc-02.th1.proen.cloud
       http:
         paths:
-        - path: /group3
+        - path: /app
           pathType: Prefix
           backend:
             service:

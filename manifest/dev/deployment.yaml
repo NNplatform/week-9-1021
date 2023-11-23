@@ -2,22 +2,25 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: week-9-1021-deployment
-  labels:
-    app: week-9-1021
   namespace: group-3
+  labels:
+    app: tcc-nodejs-deployment
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: week-9-1021
+      app: tcc-nodejs-deployment
   strategy: {}
   template:
     metadata:
       labels:
-        app: week-9-1021
+        app: tcc-nodejs-deployment
     spec:
       containers:
-      - name: week9
-        image: suchawadeedocker/week-9-1021:develop
+      - name: tcc-nodejs
+        image: suchawadeedocker/week-9-1021:latest
+        ports:
+          - containerPort: 3000
         imagePullPolicy: Always
         resources: {}
       dnsPolicy: ClusterFirst
