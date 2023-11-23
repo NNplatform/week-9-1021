@@ -45,8 +45,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4  
 
-      - name: Connect K8s Cluster
-        run: ${{ secrets.KUBE_CONFIG }}
+      # - name: Connect K8s Cluster
+      #   run: ${{ secrets.KUBE_CONFIG }}
       
       - name: Check yq Version 
         run: yq
@@ -62,5 +62,5 @@ jobs:
       - name: Display yaml file
         run: cat ./manifest/dev/deployment.yaml
 
-      - name: Deploy Docker image New Version to K8s cluster
-        run: kubectl apply -f ./manifest/dev/.
+      # - name: Deploy Docker image New Version to K8s cluster
+      #   run: kubectl apply -f ./manifest/dev/.
