@@ -30,4 +30,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/week-9-1021
+          tags: ${{ secrets.DOCKER_USERNAME }}/week-9-1021:latest
