@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: week-9-1021-deployment
+  labels:
+    app: week-9-1021
+  namespace: group-3
+spec:
+  selector:
+    matchLabels:
+      app: week-9-1021
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: week-9-1021
+    spec:
+      containers:
+      - name: week9
+        image: suchawadeedocker/week-9-1021:develop
+        imagePullPolicy: Always
+        resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

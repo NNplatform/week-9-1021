@@ -33,14 +33,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Checkout k8s cluster
-        uses: actions/checkout@master
-      
-      - name: Setup K8s Cluster
-        uses: Azure/aks-set-context@v1
-        with:
-              kubeconfig: ${{ secrets.KUBE_CONFIG }}
-
-      - name: Check Current cluster
-        run: kubectl config current-context
