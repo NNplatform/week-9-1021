@@ -53,7 +53,7 @@ jobs:
       
       - name: Define Image New Version
         run: |
-              export IMAGE_WITH_TAG = ${{ env.IMAGE_NAME }}:${{ env.NEW_TAG_IMAGE }}
+              export IMAGE_WITH_TAG=${{ env.IMAGE_NAME }}:${{ env.NEW_TAG_IMAGE }}
               echo $IMAGE_WITH_TAG
 
       - name: Update Image in Deployment K8s
