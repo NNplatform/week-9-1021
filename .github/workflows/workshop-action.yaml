@@ -1,10 +1,11 @@
 name: Push to DockerHub & Deploy to K8s Cluster
-run-name: ${{ github.actor }} build and push container to DockerHub 
+run-name: build and deploy
+
 on:
   push:
     branches: ["develop"]
+
 env: 
-   IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/week-9-1021
    NEW_TAG_IMAGE: 1.0.0
 
 jobs:
@@ -53,8 +54,8 @@ jobs:
       
       - name: Define Image New Version
         run: |
-              export IMAGE_WITH_TAG=${{ env.IMAGE_NAME }}:${{ env.NEW_TAG_IMAGE }}
-              echo $IMAGE_WITH_TAG
+              image_with_new_tag="${{ secrets.DOCKER_USERNAME }}/week-9-1021:${{ env.NEW_TAG_IMAGE }}"
+              echo $image_with_new_tag
 
       - name: Update Image in Deployment K8s
         run: yq -i '.spec.template.spec.containers[0].image=strenv(IMAGE_WITH_TAG)' ./manifest/dev/deployment.yaml
