@@ -1,5 +1,5 @@
 name: Push to DockerHub & Deploy to K8s Cluster
-run-name: Build & Push on Dockerhub and Deploy to K8S
+run-name: Build & Push to DockerHub and Deploy to K8S Cluster
 
 on:
   push:
