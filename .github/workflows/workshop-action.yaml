@@ -52,6 +52,9 @@ jobs:
         run: |
              mkdir -p ~/.kube
              echo "$KUBECTL_CONFIG_CONTENT" > ~/.kube/config
+
+      - name: Get Pod in K8s 
+        run: kubectl get po -n group-3
       
       - name: Check yq Version 
         run: yq --version
