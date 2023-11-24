@@ -70,5 +70,5 @@ jobs:
       - name: Display yaml file
         run: cat ./manifest/dev/deployment.yaml
 
-      # - name: Deploy Docker image New Version to K8s cluster
-      #   run: kubectl apply -f ./manifest/dev/.
+      - name: Deploy Docker image New Version to K8s cluster
+        run: kubectl apply -f ./manifest/dev/.
