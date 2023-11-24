@@ -46,11 +46,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4  
 
-      # - name: Connect K8s Cluster
-      #   run: ${{ secrets.KUBE_CONFIG }}
+      - name: Create K8S Config
+        env: 
+             KUBECTL_CONFIG_CONTENT: ${{ secrets.KUBE_CONFIG }}
+        run: |
+             mkdir -p ~/.kube
+             echo "$KUBECTL_CONFIG_CONTENT" > ~/.kube/config
       
       - name: Check yq Version 
-        run: yq
+        run: yq --version
       
       - name: Define Image New Version
         run: |
