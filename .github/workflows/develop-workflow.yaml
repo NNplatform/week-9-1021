@@ -1,5 +1,5 @@
-name: Push to DockerHub & Deploy to K8s Cluster
-run-name: Retag Image with Github commit id
+name: Retag Image with Github commit id
+run-name: Build Image
 
 on:
   push:
