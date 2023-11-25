@@ -34,8 +34,9 @@ jobs:
 
       - name: Build and Push with tag = Git CommitId
         uses: docker/build-push-action@v5
+        run:  echo $commit_id
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/week-9-1021:${{env.commitid}}
+          tags: ${{ secrets.DOCKER_USERNAME }}/week-9-1021:$commit_id
