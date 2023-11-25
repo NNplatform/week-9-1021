@@ -45,6 +45,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4  
+      
+      - name: Build and Push Docker New Tag
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/week-9-1021:1.0.0
 
       - name: Create K8S Config
         env: 
