@@ -53,8 +53,8 @@ jobs:
              mkdir -p ~/.kube
              echo "$KUBECTL_CONFIG_CONTENT" > ~/.kube/config
 
-      - name: Get Pod in K8s 
-        run: kubectl get po -n group-3
+      - name: Get Current Cluster
+        run: kubectl config current-context
       
       - name: Check yq Version 
         run: yq --version
@@ -71,4 +71,4 @@ jobs:
         run: cat ./manifest/dev/deployment.yaml
 
       - name: Deploy Docker image New Version to K8s cluster
-        run: kubectl apply -f ./manifest/dev/.
+        run: kubectl apply -f ./manifest/dev/. -n group-3
