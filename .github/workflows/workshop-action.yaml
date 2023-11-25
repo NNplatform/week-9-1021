@@ -45,6 +45,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4  
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
       
       - name: Build and Push Docker New Tag
         uses: docker/build-push-action@v5
