@@ -1,0 +1,26 @@
+name: Push to DockerHub & Deploy to K8s Cluster
+run-name: Build & Push to DockerHub and Deploy to K8S Cluster
+
+on:
+  push:
+    branches: ["develop"]
+
+jobs:
+  update_tag_with_committid:
+
+    name: Update tag image with Git commitID
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4 
+
+      - name: Get Git CommitId  
+        run: |
+            echo "commitid=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+            echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_ENV"
+            echo $branch
+            echo $commitid
+
+      - name: Build and Push witg tag CommitId
+        run: echo "..."
