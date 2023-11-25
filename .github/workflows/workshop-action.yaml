@@ -60,7 +60,6 @@ jobs:
         run: yq --version
       
       - name: Define Image New Version
-        env: 
         run: |
               echo "image_with_new_tag=${{ secrets.DOCKER_USERNAME }}/week-9-1021:${{ env.NEW_TAG_IMAGE }}" >> $GITHUB_ENV
               echo $image_with_new_tag
