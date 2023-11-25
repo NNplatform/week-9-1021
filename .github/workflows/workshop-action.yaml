@@ -72,3 +72,21 @@ jobs:
 
       - name: Deploy Docker image New Version to K8s cluster
         run: kubectl apply -f ./manifest/dev/. -n group-3
+
+  update_tag_with_committid:
+
+    name: Update tag image with Git commitID
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4 
+
+      - name: Get Git CommitId  
+        run: |
+            echo "commitid=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+            echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_ENV"
+            $branch
+            $commitid
+
+     
