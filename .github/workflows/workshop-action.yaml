@@ -61,7 +61,7 @@ jobs:
       
       - name: Define Image New Version
         run: |
-              export image_with_new_tag=${{ secrets.DOCKER_USERNAME }}/week-9-1021:${{ env.NEW_TAG_IMAGE }}
+              echo "image_with_new_tag=${{ secrets.DOCKER_USERNAME }}/week-9-1021:${{ env.NEW_TAG_IMAGE }}" >> $image_with_new_tag
               echo $image_with_new_tag
 
       - name: Update Image in Deployment K8s
