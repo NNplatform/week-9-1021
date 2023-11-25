@@ -18,8 +18,8 @@ jobs:
       - name: Get Git CommitId  
         run: |
             echo "commitid=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
-            echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_ENV"
-            echo "$branch"
+            # echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_ENV"
+            # echo "$branch"
             echo "$commitid"
 
       - name: Log in to Docker Hub
