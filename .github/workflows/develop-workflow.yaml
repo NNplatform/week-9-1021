@@ -17,25 +17,12 @@ jobs:
 
       - name: Get Git CommitId  
         run: |
-            echo "commitid=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_ENV
+            echo "commitid=$(git rev-parse --short '$GITHUB_SHA')" >> $GITHUB_ENV
             echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
-            echo "$branch"
-            echo "$commitid"
-
-      
-      - name: Get Branch
-        id: branch
-        run: echo "git_branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_BRANCH
-
-      - name: Check Branch
-        run: echo "${{ env.branch }}"
-
-      - name: Get Hash
-        id: hash
-        run: echo "git_hash=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_HASH
-
-      - name: Check Hash
-        run: echo "${{ env.hash }}"
+            source $GITHUB_ENV
+            echo "branch: " $branch
+            echo "commitid: " $commitid
+            
 
       # - name: Log in to Docker Hub
       #   uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
