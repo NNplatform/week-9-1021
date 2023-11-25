@@ -32,6 +32,10 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Echo Docker tag
+        run: |
+             echo "Docker tag: ***/week-9-1021: " ${commit_id}
+
       - name: Build and Push with tag = Git CommitId
         uses: docker/build-push-action@v5
         with:
