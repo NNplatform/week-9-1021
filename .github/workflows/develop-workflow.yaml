@@ -36,8 +36,6 @@ jobs:
         run: |
              ${{env.commit_id}}
              ${{commit_id}}
-             $commit_id
-
       # - name: Build and Push with tag = Git CommitId
       #   uses: docker/build-push-action@v5
       #   with:
