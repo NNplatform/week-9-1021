@@ -33,12 +33,12 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
 
-      - name: Set commit_id to output named COMMIT_ID
+      - name: Set output named COMMIT_ID
         id: git-commitid
         run: echo "COMMIT_ID=$commit_id" >> "$GITHUB_OUTPUT"
 
 
-      - name: Use COMMIT_ID from previouse step
+      - name: Use output from previouse step
         env:
           COMMIT_ID: ${{ steps.git-commitid.outputs.COMMIT_ID }}
         run: echo "Commit Id is $COMMIT_ID"
@@ -49,7 +49,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/week-9-1021:${{ COMMIT_ID }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/week-9-1021:${{ steps.git-commitid.outputs.COMMIT_ID }}
 
 
       # - name: Build and Push with tag = Git CommitId
