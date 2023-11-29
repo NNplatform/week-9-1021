@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: week-9-1021-service
+  name: week-10-1021-service
   labels:
     app: tcc-nodejs-service
 spec:

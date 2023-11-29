@@ -12,10 +12,10 @@ spec:
     - host: tcc-02.th1.proen.cloud
       http:
         paths:
-        - path: /week10
+        - path: /app
           pathType: Prefix
           backend:
             service:
-              name: week-9-1021-service
+              name: week-10-1021-service
               port:
                 number: 3000
