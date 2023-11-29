@@ -45,6 +45,8 @@ jobs:
       
       - name: Build and Push with tag = Git CommitId
         uses: docker/build-push-action@v5
+        env:
+          COMMIT_ID: ${{ steps.git-commitid.outputs.COMMIT_ID }}
         with:
           context: .
           file: ./Dockerfile
