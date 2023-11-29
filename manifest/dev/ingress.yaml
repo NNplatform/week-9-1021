@@ -6,7 +6,6 @@ metadata:
     app: tcc-nodejs-ingress
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: HTTP
-  namespace: group-3
 spec:
   ingressClassName: nginx
   rules:
