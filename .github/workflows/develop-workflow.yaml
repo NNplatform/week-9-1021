@@ -69,5 +69,5 @@ jobs:
       - name: Display yaml file
         run: cat ./manifest/dev/deployment.yaml
 
-      # - name: Deploy Image
-      #   run: kubectl apply -f ./manifest/dev/. -n group-3-dev
+      - name: Deploy Image
+        run: kubectl apply -f ./manifest/dev/. -n group-3-dev
