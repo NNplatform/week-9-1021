@@ -23,9 +23,13 @@ jobs:
         run: |
               version=$(jq -r '.version' package.json)
               echo "Package version is: $version"
-              # echo "package=$(cat ./package.json)" >> $GITHUB_ENV
-              # echo "package file: " $package
-# - run: |
-#     echo '${{ fromJson(env.PACKAGE_JSON).version }}'
+              echo "release_version=$version" >> $GITHUB_ENV
+      
+      - name: Set output named RELEASE_VERSION
+        id: release-version
+        run: echo "RELEASE_VERSION=$release_version" >> "$GITHUB_OUTPUT"
+
+      - name: Echo RELEASE_VERSION
+        run: ${{ steps.release-version.outputs.RELEASE_VERSION }}
 
 #have docker imagec(pull) > retag (docker tag)
