@@ -12,7 +12,7 @@ spec:
     - host: tcc-02.th1.proen.cloud
       http:
         paths:
-        - path: /app
+        - path: /week10
           pathType: Prefix
           backend:
             service:
