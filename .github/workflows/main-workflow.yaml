@@ -1,5 +1,5 @@
-name: Retag Image with Github commit id
-run-name: Build Image
+name: Retag Image with Release Version
+run-name: Build and Push Image with rc
 
 on:
 
@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: echo hello
-        run: echo "hello nhoona"
+        run: echo "hello main action"
 
 #       - name: Get Release Version
 #         run: cat ./package.json.version

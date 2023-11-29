@@ -1,11 +1,9 @@
-name: Retag Image with Github commit id
-run-name: Build Image
+name: Retag Image with Commit id
+run-name: Build and Push Image with commitid
 
 on:
   push:
     branches: ["develop"]
-  # pull_request:
-  #   branches: ["main"]
 
 jobs:
   update_tag_with_committid:
@@ -35,31 +33,17 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Echo Docker tag
-        run: |
-             echo "Docker tag: ***/week-9-1021: " ${commit_id}
-
-      - name: Build and Push with tag = Git CommitId
-        uses: docker/build-push-action@v5
         env: 
-            COMMIT_ID: $commit_id
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/week-9-1021:${{ github.sha }}
+             COMMIT_ID:: ${{ commit_id }} 
+        run: |
+             echo "Docker tag: ***/week-9-1021: " $COMMIT_ID
 
-#   update_tag_with_release_version:
-
-#     name: Update tag image with Release Version
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout Repository
-#         uses: actions/checkout@v4 
-
-# #       - name: Get Release Version
-# #         run: cat ./package.json.version
-# #         cat ./package.json >> $GITHUB_ENV
-# #     echo 'EOF' >> $GITHUB_ENV
-# # - run: |
-# #     echo '${{ fromJson(env.PACKAGE_JSON).version }}'
+      # - name: Build and Push with tag = Git CommitId
+      #   uses: docker/build-push-action@v5
+      #   env: 
+      #       COMMIT_ID: $commit_id
+      #   with:
+      #     context: .
+      #     file: ./Dockerfile
+      #     push: true
+      #     tags: ${{ secrets.DOCKER_USERNAME }}/week-9-1021:${{ github.sha }}
