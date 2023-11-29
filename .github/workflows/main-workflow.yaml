@@ -19,10 +19,10 @@ jobs:
       - name: echo hello
         run: echo "hello main action"
 
-#       - name: Get Release Version
-#         run: cat ./package.json.version
-#         cat ./package.json >> $GITHUB_ENV
-#     echo 'EOF' >> $GITHUB_ENV
+      - name: Get Release Version
+        run: |
+              echo "package=$(cat ./package.json)" >> $GITHUB_ENV
+              echo "package file: " $package
 # - run: |
 #     echo '${{ fromJson(env.PACKAGE_JSON).version }}'
 
