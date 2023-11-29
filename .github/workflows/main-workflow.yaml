@@ -1,0 +1,29 @@
+name: Retag Image with Github commit id
+run-name: Build Image
+
+on:
+
+  pull_request:
+    branches: ["develop"]
+
+jobs:
+  update_tag_with_release_version:
+
+    name: Update tag image with Release Version
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: echo hello
+        run: echo "hello nhoona"
+
+#       - name: Get Release Version
+#         run: cat ./package.json.version
+#         cat ./package.json >> $GITHUB_ENV
+#     echo 'EOF' >> $GITHUB_ENV
+# - run: |
+#     echo '${{ fromJson(env.PACKAGE_JSON).version }}'
+
+#have docker imagec(pull) > retag (docker tag)
