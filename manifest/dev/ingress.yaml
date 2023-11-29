@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: week-9-1021-ingress
+  name: week-10-1021-ingress
   labels:
     app: tcc-nodejs-ingress
   annotations:
@@ -12,7 +12,7 @@ spec:
     - host: tcc-02.th1.proen.cloud
       http:
         paths:
-        - path: /week10
+        - path: /app
           pathType: Prefix
           backend:
             service:

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: week-9-1021-deployment
+  name: week-10-1021-deployment
   labels:
     app: tcc-nodejs-deployment
 spec:
