@@ -4,8 +4,8 @@ run-name: Build Image
 on:
   push:
     branches: ["develop"]
-  pull_request:
-    branches: ["main"]
+  # pull_request:
+  #   branches: ["main"]
 
 jobs:
   update_tag_with_committid:
@@ -48,14 +48,18 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/week-9-1021:${{ github.sha }}
 
-  update_tag_with_release_version:
+#   update_tag_with_release_version:
 
-    name: Update tag image with Release Version
-    runs-on: ubuntu-latest
+#     name: Update tag image with Release Version
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4 
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v4 
 
-      - name: Get Release Version
-        run: cat ./package.json.version
+# #       - name: Get Release Version
+# #         run: cat ./package.json.version
+# #         cat ./package.json >> $GITHUB_ENV
+# #     echo 'EOF' >> $GITHUB_ENV
+# # - run: |
+# #     echo '${{ fromJson(env.PACKAGE_JSON).version }}'
