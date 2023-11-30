@@ -38,8 +38,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Run docker pull help
-        run: docker pull --help
+      - name: Pull Image
+        run: |
+             docker pull $image_with_commit_tag
+             docker images | grep 1021
 
 
       # - name: Check Pull Request Approval
