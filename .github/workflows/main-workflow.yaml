@@ -71,6 +71,14 @@ jobs:
             #  $tag_command 
             #  docker images | grep 1021
 
+      # - name: Build and Image
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: .
+      #     file: ./Dockerfile
+      #     push: true
+      #     tags: ${{ steps.image-rc-tag.outputs.IMAGE_RELEASE_TAG }}
+
 
       # - name: Check Pull Request Approval
       #   run: |
