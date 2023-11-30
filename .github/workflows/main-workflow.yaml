@@ -37,7 +37,7 @@ jobs:
               echo "image_with_commit_tag is: $image_with_commit_tag"
               #----setup output
               echo "IMAGE_COMMIT_TAG=$image_with_commit_tag" >> $GITHUB_OUTPUT
-              echo "IMAGE_COMMIT_TAG is: ${{ steps.image-commit-tag.outputs.IMAGE_COMMIT_TAG }}"
+              echo "IMAGE_COMMIT_TAG is: '${{ steps.image-commit-tag.outputs.IMAGE_COMMIT_TAG }}'"
 
 
       - name: Set output New Image Tag (release version)
@@ -48,7 +48,7 @@ jobs:
               echo "image_with_rc_tag is: $image_with_rc_tag"
               #----setup output
               echo "IMAGE_RELEASE_TAG=$image_with_rc_tag" >> $GITHUB_OUTPUT
-              echo "IMAGE_RELEASE_TAG is: $${{ steps.image-rc-tag.outputs.IMAGE_RELEASE_TAG }}"
+              echo "IMAGE_RELEASE_TAG is: '${{ steps.image-rc-tag.outputs.IMAGE_RELEASE_TAG }}'"
       
 
       - name: Log in to Docker Hub
@@ -63,6 +63,13 @@ jobs:
              echo "pull_command: $pull_command"
              $pull_command 
              docker images | grep 1021
+
+      - name: Retag Image
+        run: |
+             tag_command="docker tag ${{ steps.image-commit-tag.outputs.IMAGE_COMMIT_TAG }} ${{ steps.image-rc-tag.outputs.IMAGE_RELEASE_TAG }}" >> $GITHUB_ENV
+             echo "tag_command: $tag_command"
+            #  $tag_command 
+            #  docker images | grep 1021
 
 
       # - name: Check Pull Request Approval
