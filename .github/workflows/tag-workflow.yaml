@@ -19,6 +19,13 @@ jobs:
       - name: echo hello
         run: echo "hello tag action"
       
+      - name: Access K8s Cluster
+        env: 
+             KUBECTL_CONFIG_CONTENT: ${{ secrets.KUBE_CONFIG }}
+        run: |
+             mkdir -p ~/.kube
+             echo "$KUBECTL_CONFIG_CONTENT" > ~/.kube/config
+      
       - name: Get Release Version
         run: |
               version=$(jq -r '.version' package.json)
