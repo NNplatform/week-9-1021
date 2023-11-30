@@ -50,7 +50,7 @@ jobs:
       - name: Define Image New Version
         run: |
               echo "image_with_new_tag=${{ steps.image-rc-tag.outputs.IMAGE_RELEASE_TAG }}" >> $GITHUB_ENV
-              echo "Image with CommitId is: $image_with_new_tag"
+              echo "Image with Release is: $image_with_new_tag"
 
       - name: Update Image in Deployment K8s
         run: |
@@ -60,21 +60,8 @@ jobs:
       - name: Display yaml file
         run: cat ./manifest/dev/deployment.yaml
 
-      - name: Commit Changes to Github Repository
-        run:  |
-              # Commit the changes
-              git config --local user.email "action@github.com"
-              git config --local user.name "GitHub Action"
-              git checkout develop
-              git pull origin develop
-              git branch
-              git add ./manifest/dev/deployment.yaml
-              git commit -m "ci: update image to ${image_with_new_tag}"
-              git rebase
-              git push origin develop
-
-      # - name: Deploy Image to K8s
-      #   run: kubectl apply -f ./manifest/dev/. -n group-3-prod
+      - name: Deploy Image to K8s
+        run: kubectl apply -f ./manifest/dev/. -n group-3-prod
 
 
       
