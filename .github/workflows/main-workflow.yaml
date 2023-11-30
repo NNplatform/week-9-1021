@@ -16,15 +16,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Get Release Version from Package.json file
-        run: |
-              version=$(jq -r '.version' package.json)
-              echo "Package version is: $version"
-      
       - name: Set output Release Version
         id: release-version
         run: |
               #----setup env
+              version=$(jq -r '.version' package.json)
+              echo "Package version is: $version"
               echo "release_version=$version" >> $GITHUB_ENV
               #----setup output
               echo "RELEASE_VERSION=$release_version" >> "$GITHUB_OUTPUT" 
