@@ -16,15 +16,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set output Release Version
-        id: release-version
+      - name: Get Release Version
         run: |
-              #----setup env
               version=$(jq -r '.version' package.json)
               echo "Package version is: $version"
-              echo "release_version=$version" >> $"GITHUB_ENV"
-              #----setup output
-              echo "RELEASE_VERSION=$release_version" >> "$GITHUB_OUTPUT" 
+              echo "release_version=$version" >> $GITHUB_ENV
+      
+      - name: Set output named RELEASE_VERSION
+        id: release-version
+        run: echo "RELEASE_VERSION=$release_version" >> "$GITHUB_OUTPUT" 
 
       - name: Set output Old Image Tag (commit id)
         id: image-commit-tag
@@ -34,7 +34,7 @@ jobs:
               echo "image_with_commit_tag is: $image_with_commit_tag"
               #----setup output
               echo "IMAGE_COMMIT_TAG=$image_with_commit_tag" >> $GITHUB_OUTPUT
-              echo "IMAGE_COMMIT_TAG is: '${{ steps.image-commit-tag.outputs.IMAGE_COMMIT_TAG }}'"
+              echo "IMAGE_COMMIT_TAG is: ${{ steps.image-commit-tag.outputs.IMAGE_COMMIT_TAG }}"
 
 
       - name: Set output New Image Tag (release version)
@@ -64,6 +64,7 @@ jobs:
       - name: Retag Image
         run: |
              tag_command="docker tag ${{ steps.image-commit-tag.outputs.IMAGE_COMMIT_TAG }} ${{ steps.image-rc-tag.outputs.IMAGE_RELEASE_TAG }}" >> $GITHUB_ENV
+             echo "${{ steps.release-version.outputs.RELEASE_VERSION }}"
              echo "tag_command: $tag_command"
             #  $tag_command 
             #  docker images | grep 1021
