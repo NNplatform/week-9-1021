@@ -67,17 +67,20 @@ jobs:
         run: |
               # Update the K8s deployment file using yq
               yq -i '.spec.template.spec.containers[0].image=strenv(image_with_new_tag)' ./manifest/dev/deployment.yaml
-              
-              # Commit the changes
-              git config --local user.email "action@github.com"
-              git config --local user.name "GitHub Action"
-              git checkout develop
-              git add ./manifest/dev/deployment.yaml
-              git commit -m "Update image to ${image_with_new_tag}"
-              git push origin develop
 
       - name: Display yaml file
         run: cat ./manifest/dev/deployment.yaml
 
-      - name: Deploy Image
+      - name: Commit Changes to Github Repository
+        run:  |
+              # Commit the changes
+              git config --local user.email "action@github.com"
+              git config --local user.name "GitHub Action"
+              git checkout develop
+              git pull
+              git add ./manifest/dev/deployment.yaml
+              git commit -m "Update image to ${image_with_new_tag}"
+              git push origin develop
+
+      - name: Deploy Image to K8s
         run: kubectl apply -f ./manifest/dev/. -n group-3-dev
