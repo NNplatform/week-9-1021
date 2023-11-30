@@ -74,12 +74,15 @@ jobs:
       - name: Commit Changes to Github Repository
         run:  |
               # Commit the changes
+              git config --local user.email "action@github.com"
+              git config --local user.name "GitHub Action"
               git checkout develop
+              git pull
               git branch
               git add ./manifest/dev/deployment.yaml
               git commit -m "ci: update image to ${image_with_new_tag}"
               git push origin develop
-              git pull origin develop
+              git rebase
 
       - name: Deploy Image to K8s
         run: kubectl apply -f ./manifest/dev/. -n group-3-dev
