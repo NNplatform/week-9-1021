@@ -55,8 +55,10 @@ jobs:
 
       - name: Pull Image
         run: |
-             docker pull $image_with_commit_tag
-             docker images | grep 1021
+             pull_command="$image_with_commit_tag" >> $GITHUB_ENV
+             echo "pull_command: $pull_command"
+            #  docker pull 
+            #  docker images | grep 1021
 
 
       # - name: Check Pull Request Approval
