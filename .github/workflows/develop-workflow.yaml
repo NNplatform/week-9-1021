@@ -81,6 +81,7 @@ jobs:
               git branch
               git add ./manifest/dev/deployment.yaml
               git commit -m "ci: update image to ${image_with_new_tag}"
+              git rebase
               git push origin develop
 
       - name: Deploy Image to K8s
