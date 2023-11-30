@@ -64,18 +64,19 @@ jobs:
       - name: Retag Image
         run: |
              tag_command="docker tag ${{ steps.image-commit-tag.outputs.IMAGE_COMMIT_TAG }} ${{ steps.image-rc-tag.outputs.IMAGE_RELEASE_TAG }}" >> $GITHUB_ENV
-             echo "${{ steps.release-version.outputs.RELEASE_VERSION }}"
              echo "tag_command: $tag_command"
-            #  $tag_command 
-            #  docker images | grep 1021
+             $tag_command 
 
-      # - name: Build and Image
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     context: .
-      #     file: ./Dockerfile
-      #     push: true
-      #     tags: ${{ steps.image-rc-tag.outputs.IMAGE_RELEASE_TAG }}
+      - name: Build and Push Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.image-rc-tag.outputs.IMAGE_RELEASE_TAG }}
+
+      - name: Check Image New tag
+        run: docker images | grep 1021
 
 
       # - name: Check Pull Request Approval
