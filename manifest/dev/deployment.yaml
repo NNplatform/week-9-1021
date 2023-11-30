@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: tcc-nodejs
-          image: suchawadeedocker/week-9-1021:18d17a9
+          image: suchawadeedocker/week-9-1021:9c2aaa6
           ports:
             - containerPort: 3000
           imagePullPolicy: Always
