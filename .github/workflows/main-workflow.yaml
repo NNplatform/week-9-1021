@@ -3,15 +3,15 @@ run-name: Build and Push Image with rc
 
 on:
 
-  pull_request:
-    branches: ["main"]
+  push:
+    branches: ["develop"]
 
 jobs:
   update_tag_with_release_version:
 
     name: Update tag image with Release Version
     runs-on: ubuntu-latest
-    if: ${{ (github.event.review.state == 'approved') }}
+    # if: ${{ (github.event.review.state == 'approved') }}
     
     steps:
       - name: Checkout Repository
