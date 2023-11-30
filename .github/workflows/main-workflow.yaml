@@ -28,7 +28,7 @@ jobs:
 
       - name: Get Old Image Tag (commit id)
         run:  |
-              image_with_commit_tag=$(yq -r '.spec.template.spec.containers[0].image' ./manifest/dev/deployment.yaml) >> $GITHUB_ENV
+              echo "image_with_commit_tag=$(yq -r '.spec.template.spec.containers[0].image' ./manifest/dev/deployment.yaml)" >> $GITHUB_ENV
               echo "image_with_commit_tag is: $image_with_commit_tag"
 
       
