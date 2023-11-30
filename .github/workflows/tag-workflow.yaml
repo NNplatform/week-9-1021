@@ -66,7 +66,7 @@ jobs:
               git config --local user.email "action@github.com"
               git config --local user.name "GitHub Action"
               git checkout develop
-              git pull
+              git pull origin develop
               git branch
               git add ./manifest/dev/deployment.yaml
               git commit -m "ci: update image to ${image_with_new_tag}"
