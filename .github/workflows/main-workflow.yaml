@@ -52,7 +52,7 @@ jobs:
 
       - name: Pull Image
         run: |
-             pull_command="${{ steps.image-commit-tag.outputs.IMAGE_COMMIT_TAG }}" >> $GITHUB_ENV
+             pull_command="docker pull ${{ steps.image-commit-tag.outputs.IMAGE_COMMIT_TAG }}" >> $GITHUB_ENV
              echo "pull_command: $pull_command"
             #  docker pull 
             #  docker images | grep 1021
