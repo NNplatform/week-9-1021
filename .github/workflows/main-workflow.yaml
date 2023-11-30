@@ -26,26 +26,23 @@ jobs:
         id: release-version
         run: echo "RELEASE_VERSION=$release_version" >> "$GITHUB_OUTPUT" 
 
-      - name: Get Old Image Tag (commit id)
+      - name: Set Old Image Tag (commit id)
+        id: image-commit-tag
         run:  |
               image_with_commit_tag=$(yq -r '.spec.template.spec.containers[0].image' ./manifest/dev/deployment.yaml) >> $GITHUB_ENV
               echo "image_with_commit_tag is: $image_with_commit_tag"
+              echo "IMAGE_COMMIT_TAG=$image_with_commit_tag" >> $GITHUB_OUTPUT
+              echo "IMAGE_COMMIT_TAG is: $IMAGE_COMMIT_TAG"
 
 
-      - name: Get New Image Tag (release version)
+      - name: Set New Image Tag (release version)
         id: image-rc-tag
         run:  |
               image_with_rc_tag="${{ secrets.DOCKER_USERNAME }}/week-9-1021:${{ steps.release-version.outputs.RELEASE_VERSION }}" >> $GITHUB_ENV
               echo "image_with_rc_tag is: $image_with_rc_tag"
-              # echo "IMAGE_RELEASE_TAG=$image_with_rc_tag" >> "$GITHUB_OUTPUT" 
-              # echo "IMAGE_RELEASE_TAG is: $IMAGE_COMMIT_TAG"
-
-
-      # - name: Set output Old Image Tag (commit id)
-      #   id: image-commit-tag
-      #   run: |
-      #        echo "IMAGE_COMMIT_TAG=$image_with_commit_tag" >> "$GITHUB_OUTPUT"
-      #        echo "IMAGE_COMMIT_TAG is: $IMAGE_COMMIT_TAG"
+              echo "IMAGE_RELEASE_TAG=$image_with_rc_tag" >> $GITHUB_OUTPUT
+              echo "IMAGE_RELEASE_TAG is: $IMAGE_RELEASE_TAG"
+      
 
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
@@ -55,7 +52,7 @@ jobs:
 
       - name: Pull Image
         run: |
-             pull_command="$image_with_commit_tag" >> $GITHUB_ENV
+             pull_command="${{ steps.image-commit-tag.outputs.IMAGE_COMMIT_TAG }}" >> $GITHUB_ENV
              echo "pull_command: $pull_command"
             #  docker pull 
             #  docker images | grep 1021
