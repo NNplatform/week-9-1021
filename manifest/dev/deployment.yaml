@@ -16,11 +16,11 @@ spec:
         app: tcc-nodejs-deployment
     spec:
       containers:
-      - name: tcc-nodejs
-        image: suchawadeedocker/week-9-1021:latest
-        ports:
-          - containerPort: 3000
-        imagePullPolicy: Always
-        resources: {}
+        - name: tcc-nodejs
+          image: suchawadeedocker/week-9-1021:bc3783b
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always
+          resources: {}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
