@@ -26,12 +26,15 @@ jobs:
         id: release-version
         run: echo "RELEASE_VERSION=$release_version" >> "$GITHUB_OUTPUT" 
 
-      
-      - name: Set Outout Old Image Tag (commit id)
-        id: image-commit-tag
+      - name: Get Old Image Tag (commit id)
         run:  |
               image_with_commit_tag=$(yq -r '.spec.template.spec.containers[0].image' ./manifest/dev/deployment.yaml) >> $GITHUB_ENV
               echo "image_with_commit_tag is: $image_with_commit_tag"
+
+      
+      - name: Set outout of Old Image Tag (commit id)
+        id: image-commit-tag
+        run:  |
               echo "IMAGE_COMMIT_TAG=$image_with_commit_tag" >> "$GITHUB_OUTPUT" 
               echo "IMAGE_COMMIT_TAG is: $IMAGE_COMMIT_TAG"
 
