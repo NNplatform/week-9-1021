@@ -22,7 +22,7 @@ jobs:
               #----setup env
               version=$(jq -r '.version' package.json)
               echo "Package version is: $version"
-              echo "release_version=$version" >> $GITHUB_ENV
+              echo "release_version=$version" >> $"GITHUB_ENV"
               #----setup output
               echo "RELEASE_VERSION=$release_version" >> "$GITHUB_OUTPUT" 
 
