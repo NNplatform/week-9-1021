@@ -68,7 +68,7 @@ jobs:
         run: cat ./manifest/dev/deployment.yaml
 
       - name: Deploy Image to K8s
-        run: kubectl apply -f ./manifest/dev/. -n group-3-prod
+        run: kubectl apply -f ./manifest/dev/deployment.yaml -n group-3-prod
 
 
       
