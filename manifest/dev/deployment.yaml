@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: week-10-1021-deployment
+  labels:
+    app: tcc-nodejs-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tcc-nodejs-deployment
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: tcc-nodejs-deployment
+    spec:
+      containers:
+        - name: tcc-nodejs
+          image: suchawadeedocker/week-9-1021:95e0de8
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always
+          resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

@@ -1,0 +1,22 @@
+name: Deploy Image RC to K8s
+run-name: Deploy Image
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  deploy_when_git_tag_attached:
+
+    name: Deploy Image RC Version when tag attached
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: echo hello
+        run: echo "hello tag action"
+
+      
