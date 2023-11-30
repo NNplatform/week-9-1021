@@ -39,7 +39,7 @@ jobs:
       - name: Set Output New Image Tag (release version)
         id: image-rc-tag
         run:  |
-              image_with_rc_tag=${{ secrets.DOCKER_USERNAME }}/week-9-1021:${{ steps.release-version.outputs.RELEASE_VERSION }}" >> $GITHUB_ENV
+              image_with_rc_tag="${{ secrets.DOCKER_USERNAME }}/week-9-1021:${{ steps.release-version.outputs.RELEASE_VERSION }}" >> $GITHUB_ENV
               echo "image_with_rc_tag is: $image_with_rc_tag"
               echo "IMAGE_RELEASE_TAG=$image_with_rc_tag" >> "$GITHUB_OUTPUT" 
               echo "IMAGE_RELEASE_TAG is: $IMAGE_COMMIT_TAG"
