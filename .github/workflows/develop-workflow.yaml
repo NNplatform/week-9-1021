@@ -82,7 +82,6 @@ jobs:
               git add ./manifest/dev/deployment.yaml
               git commit -m "ci: update image to ${image_with_new_tag}"
               git push origin develop
-              git rebase
 
       - name: Deploy Image to K8s
         run: kubectl apply -f ./manifest/dev/. -n group-3-dev
