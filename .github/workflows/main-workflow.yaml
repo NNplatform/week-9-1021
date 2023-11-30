@@ -3,7 +3,7 @@ run-name: Build and Push Image with rc
 
 on:
 
-  push:
+  pull_request:
     branches: ["develop"]
 
 jobs:
@@ -11,7 +11,8 @@ jobs:
 
     name: Update tag image with Release Version
     runs-on: ubuntu-latest
-
+    if: ${{ (github.event.review.state == 'approved')
+    
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -77,18 +78,3 @@ jobs:
 
       - name: Check Image New tag
         run: docker images | grep 1021
-
-
-      # - name: Check Pull Request Approval
-      #   run: |
-      #         token=$GITHUB_TOKEN
-      #         pr_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-      #         reviews=$(curl -sSL -H "Authorization: token $token" "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$pr_number/reviews")
-        
-      #         if echo "$reviews" | jq -r '.[] | select(.state=="APPROVED")' > /dev/null; then
-      #         echo "Pull request has been approved."
-      #         else
-      #         echo "Pull request has not been approved."
-      #         exit 1
-
-#have docker imagec(pull) > retag (docker tag)
