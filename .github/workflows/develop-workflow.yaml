@@ -74,8 +74,6 @@ jobs:
       - name: Commit Changes to Github Repository
         run:  |
               # Commit the changes
-              git config --local user.email "action@github.com"
-              git config --local user.name "GitHub Action"
               git checkout develop
               git branch
               git add ./manifest/dev/deployment.yaml
